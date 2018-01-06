@@ -5,6 +5,8 @@
 
 # Advanced Lane Finding Project
 
+### Note to reviewer: the file `all_code_from_project.py` contains all the code used for this project. However, conceptually unrelated code parts exist as seperate modules as well.
+
 The goals of this project were the following:
 
 * Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
