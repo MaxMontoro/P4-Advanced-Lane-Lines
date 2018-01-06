@@ -89,33 +89,6 @@ def undistort_image(img, camera_mtx=camera_mtx,
     destination_img = cv2.undistort(img, camera_mtx, dist_coeff, None, camera_mtx)
     return destination_img
 
-
-if __name__ == '__main__':
-    ''' If the script is invoked directly, it calibrates the camera and shows images for demonstration '''
-
-    img = read_image('camera_cal/calibration3.jpg')
-    gray = grayscale_img(img)
-
-    objpoints, imgpoints = calibration_loop(CALIBRATION_IMAGES, show_images=False)
-    ret, camera_mtx, dist_coeff, rot_vecs, trans_vecs = calibrate_camera(objpoints, imgpoints, gray)
-
-    h,  w = img.shape[:2]
-
-    newcameramtx, roi = cv2.getOptimalNewCameraMatrix(camera_mtx, dist_coeff, (w,h), 0, (w,h))
-    undistorted_image = undistort_image(img, camera_mtx, dist_coeff,newcameramtx=newcameramtx)
-
-    plt.imsave('output_images/calibration_undist3.jpg', undistorted_image)
-    #cv2.imshow('img',undistorted_image)
-    #cv2.waitKey(25000)
-import glob
-import cv2
-
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-
-from camera_calibration import read_image, grayscale_img
-
 THRESHOLDS = ['r_select', 'hls_select', 'dir_threshold', 'mag_thresh', 'abs_sobel_thresh']
 IMAGES = glob.glob('test_images/test1.jpg')
 IMAGES.append('test_images/straight_lines1.jpg')
@@ -327,16 +300,6 @@ def apply_mask(img):
     return masked_image
 
 
-if __name__ == '__main__':
-    ''' If the script is invoked directly, applies thresholds the IMAGES array '''
-    for image in ['output_images/original.jpg']:
-        image = read_image(image)
-        thresholded = apply_thresholds(image)
-        plt.imshow(thresholded, cmap='gray')
-        plt.imsave('output_images/thresholded1.jpg', thresholded, cmap='gray')
-import numpy as np
-import cv2
-
 def get_curverads_and_distance(binary_warped, leftx, rightx, ploty):
     y_eval = np.max(ploty)
 
@@ -369,27 +332,8 @@ def draw_text_on_image(img, sentences):
         cv2.putText(img, text,(40, y_position), font, 1, (255,255,255), 2, cv2.LINE_AA)
         y_position += 40
     return img
-import glob
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-from camera_calibration import read_image
 
 IMAGES = glob.glob('output_images/*')
-
-if __name__ == '__main__':
-    for image in IMAGES:
-        img = read_image(image)
-        histogram = np.sum(img[img.shape[0]//2:,:], axis=0)
-        plt.plot(histogram)
-        plt.show()
-import cv2
-import numpy as np
-import glob
-import matplotlib.pyplot as plt
-
-from camera_calibration import read_image, undistort_image
 
 IMAGES = glob.glob('test_images/test1.jpg')
 
@@ -428,23 +372,6 @@ def unwarp_image(img, src, dst):
     Minv = cv2.getPerspectiveTransform(dst, src)
     warped = cv2.warpPerspective(img, M, (w,h), flags=cv2.INTER_LINEAR)
     return warped, M, Minv
-
-
-if __name__ == '__main__':
-    for image in IMAGES:
-        image = read_image(image)
-        undistorted = undistort_image(image)
-        image, M, Minv = unwarp_image(undistorted, src, dst)
-        plt.imshow(image, cmap='gray')
-        plt.show()
-import numpy as np
-import cv2
-import matplotlib.pyplot as plt
-
-from perspective import src, dst, unwarp_image
-from camera_calibration import read_image, grayscale_img, undistort_image
-from color_thresholds import apply_thresholds
-from curvature import get_curverads_and_distance, draw_text_on_image
 
 Minv = cv2.getPerspectiveTransform(dst, src)
 
@@ -592,21 +519,6 @@ def sliding_window(binary_warped, undistorted_image, out_img=None):
         )
     return draw_poly(binary_warped, undistorted_image, left_fitx, right_fitx, ploty)
 
-
-if __name__ == '__main__':
-    image = read_image('test_images/test1.jpg')
-    undist = undistort_image(image)
-    thresholded = apply_thresholds(undist)
-
-    unwarped, M, Minv = unwarp_image(thresholded, src, dst)
-
-    result = sliding_window(unwarped, undist)
-import os
-
-from camera_calibration import undistort_image
-from perspective import unwarp_image, src, dst
-from color_thresholds import apply_thresholds, apply_mask
-from sliding_window import *
 from moviepy.editor import VideoFileClip
 
 CWD = os.getcwd()
