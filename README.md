@@ -56,7 +56,7 @@ An example of an undistorted calibration image:
 
 #### 1. An example of a distortion-corrected image.
 
-An example of a distorted (original) test image, and an undistorted version of it can be seen below.
+An example of a distorted (original) test image, and an undistorted version of it can be seen below. Differences a bit hard to spot on a large image like this, they can be best seen on the hood of the car.
 
 ![alt text](output_images/original.jpg)
 
@@ -69,7 +69,7 @@ I used a combination of color and gradient thresholds to generate a binary image
 
 ![alt text](output_images/thresholded1.jpg)
 
-The pipeline I used used various thresholds in the RGB and HLS color space along with a threhold for the direction and magnitude of the gradient. Most importantly I tried to identify pixels belonging to the lane lines, which are either yellow or white-ish. I also defined pixel ranges that should be excluded from the thresholded image. I did this so that the dark grey line in the challenge video (some kind of oil spill or road imperfection) is not mistaken for a lane line.
+The pipeline I used used various thresholds in the `RGB` and `HLS` color space along with a threhold for the direction and magnitude of the gradient. Most importantly I tried to identify pixels belonging to the lane lines, which are either yellow or white-ish. I also defined pixel ranges that should be excluded from the thresholded image. I did this so that the dark grey line in the challenge video (some kind of oil spill or road imperfection) is not mistaken for a lane line.
 
 I also used a region masked on the thresholded image to filter out everything that's not the road:
 
