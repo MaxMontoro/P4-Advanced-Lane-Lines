@@ -43,7 +43,7 @@ This returns the `camera matrix`, the `distortion coefficient`, `rotational vect
 
 Then, we can use `cv2.undistort` along with `camera matrix` and the `distortion coefficient` to undistort an image.
 
-An example of a chessboard image and the recognized corners:
+Examples of an original chessboard image and then the recognized corners:
 
 ![camera_cal](camera_cal/calibration8.jpg)
 
@@ -139,7 +139,7 @@ On the test image below, I got the following results:
 
 I implemented this step in lines # through # in my code in `sliding_window.py` in the `__main__` section of the script, so when it is evoked, it runs through the pipeline using one image as an example.  Here is an example of my result on a test image:
 
-![alt text][output_images/result.jpg]
+![alt text](output_images/result.jpg)
 
 ---
 
