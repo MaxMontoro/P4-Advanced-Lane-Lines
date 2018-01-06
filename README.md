@@ -58,7 +58,7 @@ An example of an undistorted calibration image:
 
 An example of a distorted (original) test image, and an undistorted version of it can be seen below.
 
-![alt text](test_images/original.jpg)
+![alt text](output_images/original.jpg)
 
 ![alt text](output_images/undistorted.jpg)
 
@@ -113,7 +113,7 @@ I used the sliding-window method to identify lane-line pixels on the image, and 
 
 ![alt text](output_images/histogram.png)
 
-Notice how the right lane line is very faint, but the left peak is strong - it is probably taken from an image where the right lane line is hardly visible, and the left line can be nicely seen.
+Notice how the right lane line is very faint, but the left peak is strong - it is taken from an image where the right lane line is hardly visible, and the left line can be nicely seen as a continuous line.
 
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
