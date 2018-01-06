@@ -1,3 +1,4 @@
+import os
 import cv2
 import glob
 import pickle
@@ -354,14 +355,14 @@ dst = np.float32([(450,0),
                   (w-240,h-25)])
 '''
 
-src = np.float32([(602,458),
-                  (731,456),
-                  (368,629),
-                  (1039,653)])
+src = np.float32([(573,460),
+                  (705,462),
+                  (310,682),
+                  (1090,682)])
 dst = np.float32([(450,0),
-                  (w-240,0),
-                  (450,h-55),
-                  (w-240,h-25)])
+                  (w-450,0),
+                  (450,h),
+                  (w-450,h)])
 
 
 def unwarp_image(img, src, dst):
@@ -559,8 +560,8 @@ def process_image(image):
 
 def process_video(path):
     filename = os.path.basename(path)
-    output = os.path.join(CWD, 'test_videos_output/6_{}'.format(filename))
-    clip = VideoFileClip(path)
+    output = os.path.join(CWD, 'test_videos_output/__{}'.format(filename))
+    clip = VideoFileClip(path).subclip(0,1)
     processed = clip.fl_image(process_image)
     processed.write_videofile(output, audio=False)
 
