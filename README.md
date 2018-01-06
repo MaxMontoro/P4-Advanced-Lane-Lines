@@ -160,3 +160,5 @@ I believe that by using caching, one can achieve much better accuracy of the lan
 I believe that the calculated lane curvature and the car's distance from the center of the road would be more precise in that case as well, since there would be more that points to take into account.
 
 Another improvement area would be to further fine-tune the color-, direction- and magnitude thresholds of the thresholding step. Although I tried to adjust these values as best as I could (this was a significant part of the time spent on the project), it could be further enhanced.
+
+This pipeline works well on the project video, works reasonably well on the challange video, but fails on the harder challange video.
