@@ -13,26 +13,15 @@ undistorted = undistort_image(image)
 h, w = undistorted.shape[:2]
 
 # define source and destination points for transform
-'''
-src = np.float32([(574,473),
-                  (753,472),
-                  (368,629),
-                  (1039,653)])
+# source points edited for project resubmission
+src = np.float32([(573,460),
+                  (705,462),
+                  (310,682),
+                  (1090,682)])
 dst = np.float32([(450,0),
-                  (w-240,0),
-                  (450,h-55),
-                  (w-240,h-25)])
-'''
-
-src = np.float32([(602,458),
-                  (731,456),
-                  (368,629),
-                  (1039,653)])
-dst = np.float32([(450,0),
-                  (w-240,0),
-                  (450,h-55),
-                  (w-240,h-25)])
-
+                  (w-450,0),
+                  (450,h),
+                  (w-450,h)])
 
 def unwarp_image(img, src, dst):
     ''' Unwarps (perspective transforms) the input image,

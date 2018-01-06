@@ -44,7 +44,7 @@ def process_image(image):
 
 def process_video(path):
     filename = os.path.basename(path)
-    output = os.path.join(CWD, 'test_videos_output/6_{}'.format(filename))
+    output = os.path.join(CWD, 'test_videos_output/8_{}'.format(filename))
     clip = VideoFileClip(path)
     processed = clip.fl_image(process_image)
     processed.write_videofile(output, audio=False)
