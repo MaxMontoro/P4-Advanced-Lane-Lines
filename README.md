@@ -2,7 +2,8 @@
 
 ---
 
-**Advanced Lane Finding Project**
+
+# Advanced Lane Finding Project
 
 The goals of this project were the following:
 
@@ -23,7 +24,7 @@ The goals of this project were the following:
 
 ### Camera Calibration
 
-#### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
+#### 1. Computing the camera matrix and distortion coefficients. An example of a distortion corrected calibration image.
 
 The camera calibration consisted of defining `image points` and `object points` so that we can link points on the image to points on the real-world object.
 
@@ -51,12 +52,11 @@ An example of an undistorted calibration image:
 ![camera_cal](output_images/calibration_undist3.jpg)
 
 
-
 ### Pipeline (single images)
 
 #### 1. An example of a distortion-corrected image.
 
-An example of a distorted (original) test image, and an undistorted version can be seen below.
+An example of a distorted (original) test image, and an undistorted version of it can be seen below.
 
 ![alt text](test_images/original.jpg)
 
@@ -120,9 +120,9 @@ Notice how the right lane line is very faint, but the left peak is strong - it i
 
 I did this in lines 3 through 17 in my code in `curvature.py` by using a very simple function to print the estimated lane curvature to the standard output. This function is used in the `sliding window` script, so that when the video is generated, the estimated curvature is printed out.
 
-The resulting lane curvatures are about `700m` and above, with most values being around `1200-1300m` which seem to be in the correct order of magnitude. On some nearly straight stretches of road, the lane curvature can be one or even two orders of magnitude larger, but this is expected, since in theory a straight line has no curvature (segment of a circle with an infinite radius).
+The resulting lane curvatures are around `500m` and above, with most values being around `700-1300m` which seem to be in the correct order of magnitude. On some nearly straight stretches of road, the lane curvature can be one or even two orders of magnitude larger, but this is expected, since in theory a straight line has no curvature (segment of a circle with an infinite radius).
 
-The distance from the center of the lane was calculated in the same function. This was done by getting the X-intercepts of the estimated lane lines (this would be the center of the lane) and calculating its distance from the camera (which is halfway through the X axis), then converting the pixel values to meters.
+The distance from the center of the lane was calculated in the same function. This was done by getting the X-intercepts of the estimated lane lines (this would be the center of the lane) and calculating its distance from the camera (which is halfway through the X axis), then converting the pixel values to meters. This is usually a value from `-.7m` to `.7m`, which is again imprecise but in the correct order of magnitue.
 
 On the test image below, I got the following results:
 
@@ -153,4 +153,10 @@ Here's a [link to my video result](./project_video.mp4).
 
 #### 1. Discussion, problems, improvement areas
 
-My submission utilizes the sliding window method with
+My submission utilizes the sliding window method with no caching, so there is a big opportity of improvement there. This is something that I plan to implement in the future, however, I wanted to have a simple working solution first and work from that, so I just implemented the basic sliding window method in its simplest form.
+
+I believe that by using caching, one can achieve much better accuracy of the lane lines and have a more robust solution for the challange videos as well. In that case the predicted lane would be more stable and not so wobbly.
+
+I believe that the calculated lane curvature and the car's distance from the center of the road would be more precise in that case as well, since there would be more that points to take into account.
+
+Another improvement area would be to further fine-tune the color-, direction- and magnitude thresholds of the thresholding step. Although I tried to adjust these values as best as I could (this was a significant part of the time spent on the project), it could be further enhanced.
